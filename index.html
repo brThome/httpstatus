@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HTTP Status Tester</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		:root {
+			--bg-color: #121212;
+			--text-color: #dbdbdb;
+			--code-bg: #1e1e1e;
+			--accent-color: #00bcd4;
+		}
+	
+		body {
+			background-color: var(--bg-color);
+			color: var(--text-color);
+			font-family: sans-serif;
+			max-width: 800px;
+			margin: 2em auto;
+			padding: 1em;
+			line-height: 1.6;
+		}
+	
+		a {
+			color: var(--accent-color);
+		}
+	
+		code {
+			background: var(--code-bg);
+			color: #e0e0e0;
+			padding: 0.2em 0.4em;
+			border-radius: 4px;
+		}
+	
+		pre {
+			background: var(--code-bg);
+			color: #e0e0e0;
+			padding: 1em;
+			border-radius: 4px;
+			overflow-x: auto;
+		}
+	
+		h1,
+		h2 {
+			color: #dbdbdb;
+		}
+	
+		hr {
+			border-color: #333;
+		}
+	</style>
+</head>
+<body>
+	<h1>http.thome.in</h1>
+	<p>A simple HTTP service for testing delayed responses and custom HTTP status codes.</p>
+
+	<h2>Usage</h2>
+	<p>Make a GET request to the following format:</p>
+	<pre><code>http://http.thome.in/{statusCode}?sleep={seconds}</code></pre>
+
+	<ul>
+		<li><code>{statusCode}</code>: Any 3-digit HTTP status code (e.g. 200, 404, 503)</li>
+		<li><code>sleep</code>: Optional query parameter (in seconds). The server will delay the response by that amount, up to a max of 30 seconds.</li>
+	</ul>
+
+	<h2>Examples</h2>
+
+	<p><strong>Immediate 200 OK:</strong></p>
+	<pre><code>http://http.thome.in/200</code></pre>
+
+	<p><strong>Return 503 after 10 seconds:</strong></p>
+	<pre><code>http://http.thome.in/503?sleep=10</code></pre>
+
+	<p><strong>Return 404 after 3 seconds:</strong></p>
+	<pre><code>http://http.thome.in/404?sleep=3</code></pre>
+
+	<h2>Response</h2>
+	<p>The server responds with JSON describing the request:</p>
+	<pre><code>{
+  "method": "GET",
+  "url": "/503?sleep=10",
+  "requestedSleep": "10 seconds",
+  "maxSleep": "30 seconds",
+  "requestedStatus": 503
+}</code></pre>
+
+	<h2>Notes</h2>
+	<ul>
+		<li>If <code>sleep</code> exceeds 30 seconds, it will be capped at 30s.</li>
+		<li>If <code>sleep</code> is not provided, the response is immediate.</li>
+		<li>If the status code is invalid or missing, it defaults to <code>200 OK</code>.</li>
+	</ul>
+
+	<hr>
+	<p>http.thome.in - Use it for debugging, testing retries, or simulating latency.</p>
+</body>
+</html>

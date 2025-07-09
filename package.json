@@ -1,0 +1,17 @@
+{
+  "name": "httpstatus",
+  "version": "1.0.0",
+  "description": "A simple http status-check server for testing purposes",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "http",
+    "status",
+    "dev"
+  ],
+  "author": "PnkLzrd",
+  "license": "GPL-3.0-or-later"
+}
