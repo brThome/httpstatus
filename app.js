@@ -14,4 +14,4 @@ const server = http.createServer((req, res) => {
 	}
 });
 
-server.listen(80);
+server.listen(3000, '0.0.0.0');
